@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Post</title>
+    <%- include("./partials/head") %>
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+      .container {
+        margin-top: 20px;
+      }
+      .card-img-top {
+        width: 100%;
+        height: auto;
+        max-height: 500px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+      h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+      pre {
+        background-color: white;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+      .comment-section {
+        margin-top: 40px;
+      }
+      .form-label {
+        font-weight: bold;
+      }
+      .btn-primary {
+        background-color: #cf3c3c;
+        border: none;
+        transition: background-color 0.3s ease;
+      }
+      .btn-primary:hover {
+        background-color: #bb2d2d;
+      }
+      .comments-list {
+        margin-top: 20px;
+      }
+      .comment-item {
+        background-color: white;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+      .comment-item img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 10px;
+      }
+      .comment-item p {
+        margin: 0;
+      }
+      .comment-item .comment-author {
+        font-weight: bold;
+      }
+      .comment-item .comment-content {
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include("./partials/nav", { user: user }) %>
+
+    <div class="container">
+      <img
+        src="/uploads/<%= blog.coverImage %>"
+        class="card-img-top"
+        alt="Cover Image"
+      />
+      <% if (blogOwner) { %>
+      <form>
+        <button type="submit" class="btn btn-primary mb-5">Delete</button>
+      </form>
+      <% } %>
+      <h1><%= blog.title %></h1>
+      <pre><%= blog.body %></pre>
+    </div>
+
+    <div class="container comment-section">
+      <form method="POST" action="/blog/<%= blog._id %>">
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label"
+            >Comment Here</label
+          >
+          <textarea
+            class="form-control"
+            id="exampleFormControlTextarea1"
+            rows="3"
+            name="comment"
+            required
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mb-5">Comment</button>
+      </form>
+
+      <% if (comments && comments.length > 0) { %>
+      <div class="comments-list" style="margin-top: -5px">
+        <h2>Comments (<%= comments.length %>)</h2>
+        <% comments.forEach(comment => { %>
+        <div class="comment-item d-flex align-items-start">
+          <img
+            src="<%= comment.createdBy.profilePicURL %>"
+            alt="Profile Picture"
+          />
+          <div>
+            <p class="comment-author"><%= comment.createdBy.name %></p>
+            <p class="comment-content"><%= comment.content %></p>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+      <% } %>
+    </div>
+
+    <%- include("./partials/scripts") %>
+  </body>
+</html>

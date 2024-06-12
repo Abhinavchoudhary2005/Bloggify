@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <%- include("./partials/head") %>
+    <style>
+      body {
+        background-color: #f0f0f0;
+        overflow-x: hidden;
+      }
+      .signup {
+        height: 88vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .signup-card {
+        width: 40vw;
+        padding: 2rem;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .signup-input {
+        margin-bottom: 1.2rem;
+        font-size: 0.9rem;
+        color: rgb(43, 42, 42);
+        height: 48px; /* Increased input height */
+      }
+      .signup-btn {
+        background-color: #cf3c3c;
+        color: white;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        padding: 1rem;
+        transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+      }
+      .signup-btn:hover {
+        background-color: #bb2d2d; /* Darker background color on hover */
+        color: aliceblue; /* Lighter text color on hover */
+      }
+      .signup-text {
+        color: #cf3c3c;
+        cursor: pointer;
+      }
+      .checkbox-label {
+        margin-left: 0.5rem;
+      }
+      .signin-link {
+        margin-top: 1rem;
+      }
+      .signin-link a {
+        color: #cf3c3c;
+        text-decoration: none;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .signin-link a:hover {
+        text-decoration: underline;
+      }
+      @media screen and (max-width: 1000px) {
+        .signup-card {
+          width: 60vw;
+        }
+      }
+      @media screen and (max-width: 650px) {
+        .signup-card {
+          width: 90vw;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <%- include("./partials/nav", { user: user }) %>
+    <div class="signup mt-5 mb-5">
+      <div class="signup-card">
+        <h2 class="form-title text-center">Sign Up</h2>
+        <form method="POST" action="/user/signup">
+          <div class="mb-3">
+            <label for="exampleInputName" class="form-label">Name</label>
+            <input
+              type="text"
+              name="name"
+              class="form-control signup-input"
+              id="exampleInputName"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"
+              >Email address</label
+            >
+            <input
+              type="email"
+              name="email"
+              class="form-control signup-input"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              required
+            />
+            <div id="emailHelp" class="form-text">
+              We'll never share your email with anyone else.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label"
+              >Password</label
+            >
+            <input
+              type="password"
+              name="password"
+              class="form-control signup-input"
+              id="exampleInputPassword1"
+              required
+            />
+          </div>
+          <button type="submit" class="btn signup-btn">Submit</button>
+        </form>
+        <div class="signin-link ms-2">
+          <p>
+            Already have an account?
+            <a onclick="handleSwitchMode()" style="color: #cf3c3c"
+              >Sign in here</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+    <%- include("./partials/scripts") %>
+    <script>
+      function handleSwitchMode() {
+        window.location.href = "/user/signin";
+      }
+    </script>
+  </body>
+</html>

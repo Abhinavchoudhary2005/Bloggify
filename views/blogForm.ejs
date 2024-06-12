@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create a Blog Post</title>
+    <%- include("./partials/head") %>
+    <style>
+      body {
+        background-color: #f0f0f0;
+      }
+      .form-container {
+        width: 60%;
+        margin: 5rem auto;
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .form-label h5 {
+        color: #333;
+        margin-bottom: 0.5rem;
+      }
+      .form-control {
+        width: 100%;
+        padding: 0.75rem;
+        font-size: 1rem;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        margin-bottom: 1rem;
+      }
+      .form-control:focus {
+        outline: none;
+        border-color: #cf3c3c;
+        box-shadow: 0 0 0 0.2rem rgba(207, 60, 60, 0.25);
+      }
+      .btn-primary {
+        background-color: #cf3c3c;
+        color: #fff;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      .btn-primary:hover {
+        background-color: #bb2d2d;
+      }
+      textarea {
+        width: 100%;
+        padding: 0.75rem;
+        font-size: 1rem;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        resize: none;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include("./partials/nav", { user: user }) %>
+    <div class="form-container">
+      <form method="POST" action="/blog" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="formFile" class="form-label"
+            ><h5>Choose Cover image</h5></label
+          >
+          <input
+            class="form-control shadow-lg p-3 mb-3 bg-body-tertiary rounded"
+            type="file"
+            id="formFile"
+            name="coverImage"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label"
+            ><h5>Title</h5></label
+          >
+          <input
+            class="form-control shadow-lg p-3 mb-3 bg-body-tertiary rounded"
+            type="text"
+            id="exampleFormControlInput1"
+            name="title"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label"
+            ><h5>Body</h5></label
+          >
+          <textarea
+            class="form-control shadow-lg p-3 mb-3 bg-body-tertiary rounded"
+            id="exampleFormControlTextarea1"
+            rows="3"
+            name="body"
+            oninput="autoGrow(this)"
+            required
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3 mb-5">Submit</button>
+      </form>
+    </div>
+    <%- include("./partials/scripts") %>
+    <script>
+      function autoGrow(element) {
+        element.style.height = "auto";
+        element.style.height = element.scrollHeight + "px";
+      }
+    </script>
+  </body>
+</html>

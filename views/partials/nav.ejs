@@ -1,0 +1,145 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand me-5" href="/">Blogify</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <% if (user) { %>
+        <li class="nav-item">
+          <a class="nav-link" href="/blog">Add Blog</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="dropdown-toggle"
+            style="color: black; text-decoration: none; font-size: 1.2rem"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <%= user.name %>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" href="/user/logout">Log out</a>
+            </li>
+          </ul>
+        </li>
+        <% } else { %>
+        <li class="nav-item">
+          <a class="nav-link" href="/user/signin">Sign in</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/user/signup">Sign up</a>
+        </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .navbar {
+    padding: 1rem 2rem;
+    background-color: #adefd1ff;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .navbar-brand {
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: black;
+  }
+
+  .navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .nav-item {
+    position: relative;
+  }
+
+  .nav-link {
+    color: black;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+  }
+
+  .nav-link.active {
+    color: #cf3c3c;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    width: 80%;
+    height: 2px;
+    background-color: black;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    transform-origin: bottom center;
+    transition: transform 0.7s ease-in-out;
+  }
+
+  .nav-link:hover::after {
+    transform: translateX(-50%) scaleX(1);
+  }
+
+  .navbar-toggler {
+    border: none;
+    background-color: transparent;
+  }
+
+  .dropdown-menu {
+    background-color: #f8f9fa;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .dropdown-item {
+    color: black;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .dropdown-item:hover {
+    background-color: #cf3c3c;
+    color: white;
+  }
+
+  .login-btn {
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    color: black;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .login-btn:hover {
+    background-color: #cf3c3c;
+    color: white;
+    border: 1px solid transparent;
+  }
+
+  .login-btn-clicked {
+    background-color: #df5151;
+    color: white;
+    border: 1px solid transparent;
+  }
+</style>
