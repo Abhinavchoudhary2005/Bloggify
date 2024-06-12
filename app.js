@@ -17,7 +17,7 @@ const app = express();
 
 //Connection
 mongoose
-  .connect(process.env.MONGO_URL, {
+  .connect("mongodb://127.0.0.1:27017/Bloggify", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

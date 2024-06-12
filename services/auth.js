@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const jwt = require("jsonwebtoken");
 
-const secret = process.env.secret;
+const secret = "oiuotuTtyfdtvdt";
 
 function createTokenForUser(user) {
   const payload = {
