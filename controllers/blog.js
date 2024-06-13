@@ -1,7 +1,8 @@
+const fs = require("fs");
+const path = require("path");
 const Blog = require("../modules/blogs.js");
 const Comment = require("../modules/comments.js");
 const multer = require("multer");
-const path = require("path");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -101,6 +102,24 @@ const deleteBlog = async (req, res) => {
   if (!user) return res.redirect("/user/signin");
 
   try {
+    const blog = await Blog.findById(req.params.id);
+    if (!blog) {
+      return res.status(404).send("Blog not found");
+    }
+
+    const imagePath = path.resolve(
+      __dirname,
+      "../public/uploads",
+      blog.coverImage
+    );
+
+    // Delete the image file
+    fs.unlink(imagePath, (err) => {
+      if (err) {
+        console.error("Error deleting image file:", err);
+      }
+    });
+
     await Blog.deleteOne({ _id: req.params.id });
     return res.redirect("/");
   } catch (err) {
