@@ -49,7 +49,6 @@ const postBlog = async (req, res) => {
 const blog = async (req, res) => {
   try {
     const user = req.user;
-    if (!user) return res.redirect("/user/signin");
     const blog = await Blog.findById(req.params.id).populate("createdBy");
     const comments = await Comment.find({ blogId: req.params.id }).populate(
       "createdBy"
