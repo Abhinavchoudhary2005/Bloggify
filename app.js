@@ -10,6 +10,7 @@ const user = require("./routes/user.js");
 const blog = require("./routes/blog.js");
 const { checkForAuthentication } = require("./middlewares/auth.js");
 const { RestrictUserToLogin } = require("./middlewares/RestrictUser.js");
+const methodOverride = require("method-override");
 
 const PORT = process.env.PORT || 8000;
 
@@ -33,6 +34,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.resolve("./public")));
 app.use(checkForAuthentication);
+app.use(methodOverride("_method"));
 
 //viewEngine
 app.engine("ejs", ejsMate);

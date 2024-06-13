@@ -28,6 +28,8 @@ const postBlog = async (req, res) => {
   const user = req.user;
   const body = req.body;
 
+  if (!user) return res.redirect("/user/signin");
+
   if (!req.file) {
     return res.status(400).send("No file uploaded.");
   }
@@ -46,6 +48,7 @@ const postBlog = async (req, res) => {
 const blog = async (req, res) => {
   try {
     const user = req.user;
+    if (!user) return res.redirect("/user/signin");
     const blog = await Blog.findById(req.params.id).populate("createdBy");
     const comments = await Comment.find({ blogId: req.params.id }).populate(
       "createdBy"
@@ -94,8 +97,16 @@ const postComment = async (req, res) => {
 };
 
 const deleteBlog = async (req, res) => {
-  await db.blogs.deleteOne({ _id: req.params._id });
-  return res.redirect("/");
+  const user = req.user;
+  if (!user) return res.redirect("/user/signin");
+
+  try {
+    await Blog.deleteOne({ _id: req.params.id });
+    return res.redirect("/");
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send("Server Error");
+  }
 };
 
 module.exports = {

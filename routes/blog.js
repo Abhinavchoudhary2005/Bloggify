@@ -10,7 +10,8 @@ const {
 
 const router = express.Router();
 
-router.route("/").get(blogForm).post(postBlog).delete(deleteBlog);
-router.route("/:id").get(blog).post(postComment);
+router.route("/").get(blogForm).post(postBlog);
+router.route("/:id").get(blog).delete(deleteBlog);
+router.route("/:id/comments").post(postComment);
 
 module.exports = router;

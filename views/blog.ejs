@@ -85,8 +85,14 @@
         alt="Cover Image"
       />
       <% if (blogOwner) { %>
-      <form>
-        <button type="submit" class="btn btn-primary mb-5">Delete</button>
+      <form method="POST" action="/blog/<%= blog._id %>?_method=DELETE">
+        <button
+          type="submit"
+          class="btn btn-primary mb-5"
+          onclick="return confirm('Are you sure you want to delete this post?')"
+        >
+          Delete Post
+        </button>
       </form>
       <% } %>
       <h1><%= blog.title %></h1>
@@ -94,7 +100,7 @@
     </div>
 
     <div class="container comment-section">
-      <form method="POST" action="/blog/<%= blog._id %>">
+      <form method="POST" action="/blog/<%= blog._id %>/comments">
         <div class="mb-3">
           <label for="exampleFormControlTextarea1" class="form-label"
             >Comment Here</label
@@ -111,7 +117,7 @@
       </form>
 
       <% if (comments && comments.length > 0) { %>
-      <div class="comments-list" style="margin-top: -5px">
+      <div class="comments-list">
         <h2>Comments (<%= comments.length %>)</h2>
         <% comments.forEach(comment => { %>
         <div class="comment-item d-flex align-items-start">
