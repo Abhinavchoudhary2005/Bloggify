@@ -17,10 +17,13 @@ const app = express();
 
 //Connection
 mongoose
-  .connect("mongodb://127.0.0.1:27017/Bloggify", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    "mongodb+srv://Abhinav:8xJMpwtFpVvdDrZz@bloggify-data.3vkx52b.mongodb.net/?retryWrites=true&w=majority&appName=Bloggify-data",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
   .then(() => console.log("MongoDB connected..."))
   .catch((err) => console.log("MongoDB Error...", err));
 
