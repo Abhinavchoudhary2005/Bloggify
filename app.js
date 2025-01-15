@@ -9,10 +9,9 @@ const home = require("./routes/home.js");
 const user = require("./routes/user.js");
 const blog = require("./routes/blog.js");
 const { checkForAuthentication } = require("./middlewares/auth.js");
-const { RestrictUserToLogin } = require("./middlewares/RestrictUser.js");
 const methodOverride = require("method-override");
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 5000;
 
 const app = express();
 
